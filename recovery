@@ -1,0 +1,51 @@
+💾 PART 1: BACKUP PROCESS
+🔹 For MySQL
+1.Backup using mysqldump:
+
+mysqldump -u root -p my_database_name > my_database_backup.sql
+
+->my_database_name: Replace with your DB name.
+
+->This will create a .sql file with all data and schema.
+
+2.✅ Output: my_database_backup.sql file created.
+
+🔹 For PostgreSQL
+1.Backup using pg_dump:
+
+pg_dump -U postgres -d my_database_name -f my_database_backup.sql
+
+->-U postgres: PostgreSQL username
+
+->-d: database name
+
+->-f: output file name
+
+2.✅ Output: my_database_backup.sql file created.
+
+💥 PART 2: SIMULATE FAILURE
+Delete or drop your test database to simulate a failure:
+
+DROP DATABASE my_database_name;
+
+🔁 PART 3: RESTORE PROCESS
+🔹 For MySQL
+Restore using mysql command:
+
+mysql -u root -p -e "CREATE DATABASE my_database_name;"
+mysql -u root -p my_database_name < my_database_backup.sql
+
+🔹 For PostgreSQL
+Restore using psql:
+
+createdb -U postgres my_database_name
+psql -U postgres -d my_database_name -f my_database_backup.sql
+
+✅ Check the Recovery
+Run a select query:
+
+SELECT * FROM your_table_name;
+
+->If data appears, the recovery was successful.
+
+
